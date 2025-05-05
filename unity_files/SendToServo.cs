@@ -25,7 +25,6 @@ public class SendToServo : MonoBehaviour
         serialPort = new SerialPort(portName, baudRate);
         serialPort.Open();
         System.Threading.Thread.Sleep(500);
-        // serialPort.DtrEnable = true; // may not need
 
         Debug.Log("UART client started");
         
@@ -41,7 +40,7 @@ public class SendToServo : MonoBehaviour
         }
         else
         {
-            headRot = headRot * -1;
+            headRot = headRot * 1;
         }
         
         // send if rotation > thresh & certain time has passed
@@ -60,7 +59,7 @@ public class SendToServo : MonoBehaviour
             {
                 string message = data.ToString("F2") + "\n";
                 serialPort.Write(message);
-                Debug.Log($"Sent: {message}");
+                //Debug.Log($"Sent: {message}");
             }
         
         }
@@ -69,8 +68,4 @@ public class SendToServo : MonoBehaviour
             Debug.LogError($"Send Error: {e.Message}");
         }
     }
-    // void OnApplicationQuit()
-    // {
-    //     serialPort.Close();  // Close UDP client when application quits
-    // }
     }
